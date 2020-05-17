@@ -104,30 +104,30 @@
         </el-table-column>
         <el-table-column label="标签" width="140" align="center">
           <template slot-scope="scope">
-            <p>上架：
-              <el-switch
-                @change="handlePublishStatusChange(scope.$index, scope.row)"
-                :active-value="1"
-                :inactive-value="0"
-                v-model="scope.row.publishStatus">
-              </el-switch>
-            </p>
-            <p>新品：
-              <el-switch
-                @change="handleNewStatusChange(scope.$index, scope.row)"
-                :active-value="1"
-                :inactive-value="0"
-                v-model="scope.row.newStatus">
-              </el-switch>
-            </p>
-            <p>推荐：
-              <el-switch
-                @change="handleRecommendStatusChange(scope.$index, scope.row)"
-                :active-value="1"
-                :inactive-value="0"
-                v-model="scope.row.recommandStatus">
-              </el-switch>
-            </p>
+<!--            <p>上架：-->
+<!--              <el-switch-->
+<!--                @change="handlePublishStatusChange(scope.$index, scope.row)"-->
+<!--                :active-value="1"-->
+<!--                :inactive-value="0"-->
+<!--                v-model="scope.row.publishStatus">-->
+<!--              </el-switch>-->
+<!--            </p>-->
+<!--            <p>新品：-->
+<!--              <el-switch-->
+<!--                @change="handleNewStatusChange(scope.$index, scope.row)"-->
+<!--                :active-value="1"-->
+<!--                :inactive-value="0"-->
+<!--                v-model="scope.row.newStatus">-->
+<!--              </el-switch>-->
+<!--            </p>-->
+<!--            <p>推荐：-->
+<!--              <el-switch-->
+<!--                @change="handleRecommendStatusChange(scope.$index, scope.row)"-->
+<!--                :active-value="1"-->
+<!--                :inactive-value="0"-->
+<!--                v-model="scope.row.recommandStatus">-->
+<!--              </el-switch>-->
+<!--            </p>-->
           </template>
         </el-table-column>
         <el-table-column label="排序" width="100" align="center">
@@ -205,9 +205,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         layout="total, sizes,prev, pager, next,jumper"
-        :page-size="listQuery.pageSize"
+        :page-size="listQuery.size"
         :page-sizes="[5,10,15]"
-        :current-page.sync="listQuery.pageNum"
+        :current-page.sync="listQuery.page"
         :total="total">
       </el-pagination>
     </div>
@@ -286,8 +286,8 @@
 
   const defaultListQuery = {
     keyword: null,
-    pageNum: 1,
-    pageSize: 5,
+    page: 1,
+    size: 5,
     publishStatus: null,
     verifyStatus: null,
     productSn: null,
@@ -403,8 +403,8 @@
         this.listLoading = true;
         fetchList(this.listQuery).then(response => {
           this.listLoading = false;
-          this.list = response.data.list;
-          this.total = response.data.total;
+          this.list = response.data.content;
+          this.total = response.data.totalElements;
         });
       },
       getBrandList() {

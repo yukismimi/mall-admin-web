@@ -44,24 +44,24 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="订单分类：">
-            <el-select v-model="listQuery.orderType" class="input-width" placeholder="全部" clearable>
-              <el-option v-for="item in orderTypeOptions"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="订单来源：">
-            <el-select v-model="listQuery.sourceType" class="input-width" placeholder="全部" clearable>
-              <el-option v-for="item in sourceTypeOptions"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
+<!--          <el-form-item label="订单分类：">-->
+<!--            <el-select v-model="listQuery.orderType" class="input-width" placeholder="全部" clearable>-->
+<!--              <el-option v-for="item in orderTypeOptions"-->
+<!--                         :key="item.value"-->
+<!--                         :label="item.label"-->
+<!--                         :value="item.value">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+<!--          </el-form-item>-->
+<!--          <el-form-item label="订单来源：">-->
+<!--            <el-select v-model="listQuery.sourceType" class="input-width" placeholder="全部" clearable>-->
+<!--              <el-option v-for="item in sourceTypeOptions"-->
+<!--                         :key="item.value"-->
+<!--                         :label="item.label"-->
+<!--                         :value="item.value">-->
+<!--              </el-option>-->
+<!--            </el-select>-->
+<!--          </el-form-item>-->
         </el-form>
       </div>
     </el-card>
@@ -86,7 +86,7 @@
           <template slot-scope="scope">{{scope.row.createTime | formatCreateTime}}</template>
         </el-table-column>
         <el-table-column label="用户账号" align="center">
-          <template slot-scope="scope">{{scope.row.memberUsername}}</template>
+          <template slot-scope="scope">{{scope.row.username}}</template>
         </el-table-column>
         <el-table-column label="订单金额" width="120" align="center">
           <template slot-scope="scope">￥{{scope.row.totalAmount}}</template>
@@ -415,8 +415,8 @@
         this.listLoading = true;
         fetchList(this.listQuery).then(response => {
           this.listLoading = false;
-          this.list = response.data.list;
-          this.total = response.data.total;
+          this.list = response.data.content;
+          this.total = response.data.totalElements;
         });
       },
       deleteOrder(ids){
